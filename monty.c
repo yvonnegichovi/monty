@@ -1,6 +1,9 @@
 #define _GNU_SOURCE
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 /**
  * main - monty interpreter main function
@@ -12,7 +15,7 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL;
+	char *line = NULL, *opcode;
 	size_t len = 0;
 	unsigned int line_number = 0;
 
@@ -27,13 +30,14 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error Can't open file %s\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
-	while (1)
+	while (getline(&line, &len, file) != -1)
 	{
-		line = NULL;
-		if (getline(&line, &len, file) == -1)
-			break;
 		line_number++;
-		/*Tokenize the line and process the code */
+		opcode = strtok(line, " \t\n");
+		if (!opcode)
+			continue;
+		free(line);
+		line = NULL;
 	}
 	fclose(file);
 	free(line);
