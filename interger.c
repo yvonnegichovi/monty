@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * is_interger - checks if a string is a valid interger

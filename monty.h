@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef MONTY_H
+#define MONTY_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,4 +46,4 @@ void free_stack(stack_t *stack);
 int is_integer(const char *str);
 void pop(stack_t **stack, unsigned int line_number);
 
-#endif /* MAIN_H */
+#endif /* MONTY_H */
