@@ -42,8 +42,9 @@ typedef struct instruction_s
 void exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t *stack);
+void free_stack(stack_t **stack);
 int is_integer(const char *str);
 void pop(stack_t **stack, unsigned int line_number);
+void interpreter(instruction_t *ops_array, char **all_lines);
 
 #endif /* MONTY_H */

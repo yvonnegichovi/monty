@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 		line_number++;
 		exec_opcode(line, &stack, line_number, file);
 	}
-	free_stack(stack);
+	free_stack(&stack);
 	free(line);
 	fclose(file);
 	return (EXIT_SUCCESS);
