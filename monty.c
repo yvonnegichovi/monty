@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	while ((read_line = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
-		execute_opcode(line, &stack, line_number, file);
+		exec_opcode(line, &stack, line_number, file);
 	}
 	free_stack(stack);
 	free(line);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 /**
  * push - pushes an element onto the stack
  * @stack: double pointer to the head of the stack
- * @value: value to be pushed onto the stack
+ * @line_number: value to be pushed onto the stack
  */
 
 void push(stack_t **stack, unsigned int line_number)

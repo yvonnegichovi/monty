@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * is_interger - checks if a string is a valid interger
+ * is_integer - checks if a string is a valid interger
  * @str: the string to be checked
  * Return: 0 on success, 1 on falure
  */
