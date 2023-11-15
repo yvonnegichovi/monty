@@ -15,32 +15,31 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *opcode;
+	char *line;
+	ssize_t read_line = 1;
+	stack_t *stack = NULL;
 	size_t len = 0;
 	unsigned int line_number = 0;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
 	if (!file)
 	{
 		fprintf(stderr, "Error Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	while (getline(&line, &len, file) != -1)
+	while ((read_line = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
-		opcode = strtok(line, " \t\n");
-		if (!opcode)
-			continue;
-		free(line);
-		line = NULL;
+		execute_opcode(line, &stack, line_number, file);
 	}
-	fclose(file);
+	free_stack(stack);
 	free(line);
+	fclose(file);
 	return (EXIT_SUCCESS);
 }
 
@@ -50,22 +49,19 @@ int main(int argc, char *argv[])
  * @value: value to be pushed onto the stack
  */
 
-void push(stack_t **stack, int value)
+void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node = malloc(sizeof(stack_t));
+	char *arg = NULL;
+	int value;
+	(void)**stack;
 
-	if (!new_node)
+	if (arg == NULL || !is_integer(arg))
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = value;
-	new_node->prev = NULL;
-	new_node->next = *stack;
-
-	if (*stack)
-		(*stack)->prev = new_node;
-	*stack = new_node;
+	value = atoi(arg);
+	printf("%d\n", value);
 }
 
 /**
@@ -76,14 +72,21 @@ void push(stack_t **stack, int value)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current;
+	stack_t *current = NULL, *top = NULL;
 	(void)line_number;
+
+	if (*stack == NULL)
+		return;
 
 	current = *stack;
 
-	while (current)
-	{
-		printf("%d\n", current->n);
+	while (current->next != NULL)
 		current = current->next;
+
+	top = current;
+	while (top != NULL)
+	{
+		printf("%d\n", top->n);
+		top = top->next;
 	}
 }
