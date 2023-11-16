@@ -61,7 +61,7 @@ typedef struct globals
 } globals_t;
 extern globals_t globs;
 
-int exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file);
+int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);

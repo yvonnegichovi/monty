@@ -17,29 +17,29 @@ globals_t globs;
 int main(int argc, char *argv[])
 {
 	FILE *file = NULL;
-	char **all_lines;
+	char *line = NULL;
 	stack_t *stack = NULL;
 	unsigned int line_number = 0;
+	size_t len = 0;
+	ssize_t read;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	globs.TOP1 = -99;
-	all_lines = read_lines(argv[1]);
-	globs.all_lines = all_lines;
-	for (line_number = 0; all_lines[line_number] != NULL; line_number++)
+	file = fopen(argv[1], "r");
+	if (file == NULL)
 	{
-		if (exec_opcode(all_lines[line_number], &stack, line_number + 1, file) != 0)
-		{
-			fclose(file);
-			free_stack(&stack);
-			free(all_lines);
-			exit(EXIT_FAILURE);
-		}
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
 	}
-	free_stack(&stack);
+	while ((read = getline(&line, &len, file)) != -1)
+	{
+		line_number++;
+		exec_opcode(&stack, line, line_number);
+	}
+	free(line);
 	fclose(file);
-	return (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
