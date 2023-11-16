@@ -5,6 +5,8 @@
 #include <ctype.h>
 #include <string.h>
 
+globals_t globs;
+
 /**
  * main - monty interpreter main function
  * @argc: number of arguments

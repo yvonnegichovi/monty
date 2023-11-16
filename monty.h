@@ -43,6 +43,24 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct globals - structure of globals
+ * @TOP1: value at top of stack (TOP 1)
+ * @TOP2: value under top of stack (TOP 2)
+ * @arg: argument to the opcode command
+ * @top: pointer to Node at the top
+ * @all_lines: all read lines
+ */
+typedef struct globals
+{
+	int TOP1;
+	int TOP2;
+	char **arg;
+	stack_t *top;
+	char **all_lines;
+} globals_t;
+extern globals_t globs;
+
 int exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
@@ -51,5 +69,6 @@ int is_integer(const char *str);
 void _pop(stack_t **stack, unsigned int line_number);
 char **read_lines(char *argv);
 int is_integer(const char *str);
+void _pint(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
