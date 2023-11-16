@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * @line: Line containing the opcode
+ * exec_opcode - executes opcodes
  * @stack: Pointer to the top of the stack
  * @opcode: the instruction given
  * @l_num: Current line number in the Monty file
@@ -18,7 +18,8 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"swap", _swap},
 		{"add", _add},
 		{"nop", _nop},
-		{NULL, NULL}};
+		{NULL, NULL}
+	};
 	unsigned int i = 0;
 
 	for (i = 0; instructions[i].opcode != NULL; i++)
