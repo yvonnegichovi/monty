@@ -5,16 +5,14 @@
  * @stack: the stack to be freed
  */
 
-void free_stack(stack_t **stack)
+void free_stack(stack_t *stack)
 {
-	stack_t *current = *stack;
-	stack_t *next;
+	stack_t *current;
 
-	while (current)
+	while (stack != NULL)
 	{
-		next = current->next;
+		current = stack;
+		stack = stack->next;
 		free(current);
-		current = next;
 	}
-	*stack = NULL;
 }

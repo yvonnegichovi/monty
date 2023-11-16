@@ -8,16 +8,24 @@
 
 void _push(stack_t **stack, unsigned int line_number)
 {
-	char *arg = strtok(NULL, " \t\n");
 	int value;
-	(void)**stack;
 
-	if (arg == NULL || !is_integer(arg))
+	if (glob.arg == NULL || !is_integer(glob.arg))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free_stack(*stack);
+		fclose(glob.file);
+		free(glob.line);
 		exit(EXIT_FAILURE);
 	}
-	value = atoi(arg);
-	printf("%d\n", value);
+	value = atoi(glob.arg);
+	if (add_node(stack, value) == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_stack(*stack);
+		fclose(glob.file);
+		free(glob.line);
+		exit(EXIT_FAILURE);
+	}
 }
 

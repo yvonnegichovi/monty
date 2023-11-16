@@ -31,7 +31,7 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		}
 	}
 	fprintf(stderr, "L%d: unknown instruction %s\n", l_num, opcode);
-	free_stack(stack);
+	free_stack(*stack);
 	fclose(glob.file);
 	free(glob.line);
 	exit(EXIT_FAILURE);

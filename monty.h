@@ -67,9 +67,10 @@ extern globals_t glob;
 
 int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num);
 void exec_file(stack_t **stack);
+stack_t *add_node(stack_t **stack, const int n);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
-void free_stack(stack_t **stack);
+void free_stack(stack_t *stack);
 int is_integer(const char *str);
 void _pop(stack_t **stack, unsigned int line_number);
 char **read_lines(char *argv);

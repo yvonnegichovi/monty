@@ -8,14 +8,15 @@
 
 int is_integer(const char *str)
 {
-	int i = 0;
-
 	if (!str || *str == '\0')
 		return (0);
-	for (i = 0; str[i] != '\0'; i++)
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str != '\0')
 	{
-		if (!isdigit(str[i]) && str[i] != '-' && str[i] != '+')
+		if (*str < '0' || *str > '9')
 			return (0);
+		str++;
 	}
 	return (1);
 }
