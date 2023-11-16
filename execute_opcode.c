@@ -18,6 +18,7 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"swap", _swap},
 		{"add", _add},
 		{"nop", _nop},
+		{"sub", _sub},
 		{NULL, NULL}
 	};
 	unsigned int i = 0;
