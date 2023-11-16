@@ -18,6 +18,7 @@ int exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file)
 		{"pint", _pint},
 		{"swap", _swap},
 		{"add", _add},
+		{"nop", _nop},
 		{NULL, NULL}};
 	char *op;
 	unsigned int i = 0;
