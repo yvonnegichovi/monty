@@ -14,6 +14,8 @@ void _pint(stack_t **stack, unsigned int line_number)
 	if (glob.TOP1 == -99)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free(glob.line);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	else
