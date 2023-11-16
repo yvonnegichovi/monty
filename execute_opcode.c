@@ -23,6 +23,7 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"mul", _mul},
 		{"mod", _mod},
 		{"pchar", _pchar},
+		{"pstr", _pstr},
 		{NULL, NULL}
 	};
 	unsigned int i = 0;
