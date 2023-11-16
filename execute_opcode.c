@@ -24,6 +24,8 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"mod", _mod},
 		{"pchar", _pchar},
 		{"pstr", _pstr},
+		{"rot1", _rot1},
+		{"rotr", _rotr},
 		{NULL, NULL}
 	};
 	unsigned int i = 0;
