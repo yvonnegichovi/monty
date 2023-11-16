@@ -1,11 +1,10 @@
 #include "monty.h"
 
 /**
- * exec_opcode - Execute Monty opcode
  * @line: Line containing the opcode
  * @stack: Pointer to the top of the stack
+ * @opcode: the instruction given
  * @l_num: Current line number in the Monty file
- * @file: File pointer to the Monty file
  * Return: 0 on sucess and 1 on failure
  */
 
