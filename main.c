@@ -17,7 +17,7 @@ globals_t globs;
 int main(int argc, char *argv[])
 {
 	FILE *file = NULL;
-	char *line = NULL;
+	char *line = NULL, *opcode;
 	stack_t *stack = NULL;
 	unsigned int line_number = 0;
 	size_t len = 0;
@@ -37,7 +37,10 @@ int main(int argc, char *argv[])
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		line_number++;
-		exec_opcode(&stack, line, line_number);
+		opcode = strtok(line, " \t\n");
+		if (opcode == NULL)
+			continue;
+		exec_opcode(&stack, opcode, line_number);
 	}
 	free(line);
 	fclose(file);
