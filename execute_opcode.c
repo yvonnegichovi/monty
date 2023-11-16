@@ -22,11 +22,11 @@ int exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file)
 
 	op = strtok(line, " \t\n");
 	if (!op)
-		return(1);
+		return (1);
 	op = strtok(NULL, " \t\n");
 	while (ops_array[i].opcode && op)
 	{
-		if (strcmp (op, ops_array[i].opcode) == 0)
+		if (strcmp(op, ops_array[i].opcode) == 0)
 		{
 			ops_array[i].f(stack, l_num);
 			return (0);

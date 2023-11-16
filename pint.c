@@ -6,7 +6,7 @@
  * @line_number: value to be printed
  */
 
-void _pint(stack_t **stack, unsigned int line_number)	
+void _pint(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
