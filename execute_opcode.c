@@ -21,6 +21,7 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
+		{"mod", _mod},
 		{NULL, NULL}
 	};
 	unsigned int i = 0;
