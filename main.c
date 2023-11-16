@@ -26,7 +26,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	globs.TOP1 = -99;
 	all_lines = read_lines(argv[1]);
+	globs.all_lines = all_lines;
 	for (line_number = 0; all_lines[line_number] != NULL; line_number++)
 	{
 		if (exec_opcode(all_lines[line_number], &stack, line_number + 1, file) != 0)
