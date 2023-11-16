@@ -14,11 +14,9 @@
 
 int main(int argc, char *argv[])
 {
-	FILE *file;
-	char *line;
-	ssize_t read_line = 1;
+	FILE *file = NULL;
+	char **all_lines;
 	stack_t *stack = NULL;
-	size_t len = 0;
 	unsigned int line_number = 0;
 
 	if (argc != 2)
@@ -26,30 +24,29 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	file = fopen(argv[1], "r");
-	if (!file)
+	all_lines = read_lines(argv[1]);
+	for (line_number = 0; all_lines[line_number] != NULL; line_number++)
 	{
-		fprintf(stderr, "Error Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	while ((read_line = getline(&line, &len, file)) != -1)
-	{
-		line_number++;
-		exec_opcode(line, &stack, line_number, file);
+		if (exec_opcode(all_lines[line_number], &stack, line_number + 1, file) != 0)
+		{
+			fclose(file);
+			free_stack(&stack);
+			free(all_lines);
+			exit(EXIT_FAILURE);
+		}
 	}
 	free_stack(&stack);
-	free(line);
 	fclose(file);
 	return (EXIT_SUCCESS);
 }
 
 /**
- * push - pushes an element onto the stack
+ * _push - pushes an element onto the stack
  * @stack: double pointer to the head of the stack
  * @line_number: value to be pushed onto the stack
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
 	char *arg = NULL;
 	int value;
@@ -65,12 +62,12 @@ void push(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pall - prints all values on the stack
+ * _pall - prints all values on the stack
  * @stack: double pointer to the head of the stack
  * @line_number: line number being executed
  */
 
-void pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = NULL, *top = NULL;
 	(void)line_number;

@@ -6,28 +6,39 @@
  * @stack: Pointer to the top of the stack
  * @l_num: Current line number in the Monty file
  * @file: File pointer to the Monty file
+ * Return: 0 on sucess and 1 on failure
  */
 
-void exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file)
+int exec_opcode(char *line, stack_t **stack, unsigned int l_num, FILE *file)
 {
-	char *opcode;
+	instruction_t ops_array[] = {
+		{"push", _push},
+		{"pall", _pall},
+		{"pop", _pop},
+		{NULL, NULL}};
+	char *op;
+	unsigned int i = 0;
 
-	opcode = strtok(line, " \t\n");
-	if (!opcode)
-		return;
-	opcode = strtok(NULL, " \t\n");
-	if (strcmp(opcode, "pall") == 0)
-		pall(stack, l_num);
-	else if (strcmp(opcode, "push") == 0)
-		push(stack, l_num);
-	else if (strcmp(opcode, "pop") == 0)
-		pop(stack, l_num);
-	else
+	op = strtok(line, " \t\n");
+	if (!op)
+		return(1);
+	op = strtok(NULL, " \t\n");
+	while (ops_array[i].opcode && op)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", l_num, opcode);
+		if (strcmp (op, ops_array[i].opcode) == 0)
+		{
+			ops_array[i].f(stack, l_num);
+			return (0);
+		}
+		i++;
+	}
+	if (op && ops_array[i].opcode == NULL)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", l_num, op);
 		fclose(file);
 		free_stack(stack);
 		free(line);
 		exit(EXIT_FAILURE);
 	}
+	return (1);
 }
