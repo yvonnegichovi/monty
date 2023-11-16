@@ -50,18 +50,23 @@ typedef struct instruction_s
  * @arg: argument to the opcode command
  * @top: pointer to Node at the top
  * @all_lines: all read lines
+ * @file: pointer to a monty file
+ * @line: pointer to an input line content
  */
 typedef struct globals
 {
 	int TOP1;
 	int TOP2;
-	char **arg;
+	char *arg;
 	stack_t *top;
 	char **all_lines;
+	char *line;
+	FILE *file;
 } globals_t;
-extern globals_t globs;
+extern globals_t glob;
 
 int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num);
+void exec_file(stack_t **stack);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
