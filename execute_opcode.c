@@ -26,6 +26,8 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 		{"pstr", _pstr},
 		{"rot1", _rot1},
 		{"rotr", _rotr},
+		{"stack", _stack},
+		{"queue", _queue},
 		{NULL, NULL}
 	};
 	unsigned int i = 0;
@@ -34,10 +36,6 @@ int exec_opcode(stack_t **stack, char *opcode, unsigned int l_num)
 	{
 		if (strcmp(opcode, instructions[i].opcode) == 0)
 		{
-			if (strcmp(opcode, "stack") == 0)
-				glob.mode = 0; /*sets mode to stack*/
-			else if (strcmp(opcode, "queue") == 0)
-				glob.mode = 1; /* sets mode to queue*/
 			instructions[i].f(stack, l_num);
 			return (0);
 		}
