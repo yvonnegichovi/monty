@@ -52,6 +52,7 @@ typedef struct instruction_s
  * @all_lines: all read lines
  * @file: pointer to a monty file
  * @line: pointer to an input line content
+ * @mode: 0 for stack (LIFO), 1 for queue (FIFO)
  */
 typedef struct globals
 {
@@ -62,6 +63,7 @@ typedef struct globals
 	char **all_lines;
 	char *line;
 	FILE *file;
+	int mode;
 } globals_t;
 extern globals_t glob;
 
@@ -87,5 +89,7 @@ void _pchar(stack_t **stack, unsigned int line_number);
 void _pstr(stack_t **stack, unsigned int line_number);
 void _rot1(stack_t **stack, unsigned int line_number);
 void _rotr(stack_t **stack, unsigned int line_number);
+void _stack(stack_t **stack, unsigned int line_number);
+void _queue(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

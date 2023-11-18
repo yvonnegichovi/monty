@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 {
 	stack_t *stack = NULL;
 
+	glob.mode = 0;
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
