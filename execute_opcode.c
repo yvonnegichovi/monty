@@ -62,7 +62,7 @@ void exec_file(stack_t **stack)
 	{
 		l_num++;
 		opcode = strtok(glob.line, " \t\r\n\\a");
-		/*glob.arg = strtok(NULL, " \n\t");*/
+		glob.arg = strtok(NULL, " \n\t");
 		if (opcode == NULL || *opcode == '#')
 			continue;
 		exec_opcode(stack, opcode, l_num);
